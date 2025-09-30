@@ -13,16 +13,20 @@ import {
   createUIMessageStreamResponse,
   type ToolSet
 } from "ai";
-import { OpenAI } from "openai";
+
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { processToolCalls, cleanupMessages } from "./utils";
 import { tools, executions } from "./tools";
 import { env } from "cloudflare:workers";
 
-// Cloudflare AI Gateway
-const openai = new OpenAI({
-   apiKey: env.OPENAI_API_KEY,
-   baseURL: env.GATEWAY_BASE_URL,
+const google = createGoogleGenerativeAI({
+  apiKey: env.GOOGLE_API_KEY,
+  baseURL: env.GATEWAY_BASE_URL,
+  headers: {
+    "cf-aig-authorization": `Bearer ${env.OPENAI_API_KEY}`,
+  }
 });
+const model = google("gemini-2.5-flash");
 
 /**
  * Chat Agent implementation that handles real-time AI chat interactions
