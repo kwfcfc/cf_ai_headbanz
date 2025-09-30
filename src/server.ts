@@ -13,17 +13,16 @@ import {
   createUIMessageStreamResponse,
   type ToolSet
 } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { OpenAI } from "openai";
 import { processToolCalls, cleanupMessages } from "./utils";
 import { tools, executions } from "./tools";
-// import { env } from "cloudflare:workers";
+import { env } from "cloudflare:workers";
 
-const model = openai("gpt-4o-2024-11-20");
 // Cloudflare AI Gateway
-// const openai = createOpenAI({
-//   apiKey: env.OPENAI_API_KEY,
-//   baseURL: env.GATEWAY_BASE_URL,
-// });
+const openai = new OpenAI({
+   apiKey: env.OPENAI_API_KEY,
+   baseURL: env.GATEWAY_BASE_URL,
+});
 
 /**
  * Chat Agent implementation that handles real-time AI chat interactions
