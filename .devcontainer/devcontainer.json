@@ -1,0 +1,34 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+  "features": {
+    "ghcr.io/meaningful-ooo/devcontainer-features/fish:2": {},
+    "ghcr.io/devcontainers-extra/features/cloudflare-wrangler:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "openai.chatgpt"
+      ]
+    },
+    "vscodium": {
+      "registries": {
+        "openvsx": {
+          "url": "https://open-vsx.org/vscode/gallery",
+          "headers": {
+            "Accept": "application/json"
+          }
+        }
+      },
+      "extensions": {
+        "streetsidesoftware.code-spell-checker": {
+          "registry": "openvsx"
+        },
+        "openai.chatgpt": {
+          "registry": "openvsx"
+        }
+      }
+    }
+  }
+}
